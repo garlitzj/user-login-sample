@@ -8,6 +8,7 @@ use CodeIgniter\HTTP\IncomingRequest;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use Psr\Log\LoggerInterface;
+use App\Models\User;
 
 /**
  * Class BaseController
@@ -37,6 +38,8 @@ abstract class BaseController extends Controller
      */
     protected $helpers = [];
 
+    protected $loggedInUser = null;
+
     /**
      * Be sure to declare properties for any property fetch you initialized.
      * The creation of dynamic property is deprecated in PHP 8.2.
@@ -54,5 +57,21 @@ abstract class BaseController extends Controller
         // Preload any models, libraries, etc, here.
 
         // E.g.: $this->session = \Config\Services::session();
+
+        // set logged in user
+        if(session()->get('user_id')) {
+            $userModel = new User();
+            $logged = $userModel->find(session()->get('user_id'));
+
+            if($logged) {
+                $this->loggedInUser = $logged;
+            }
+        }
+    }
+
+    protected function renderView($view, $data = []) {
+        $data = ['logged_in_user' => $this->loggedInUser];
+
+        return view($view, $data);
     }
 }

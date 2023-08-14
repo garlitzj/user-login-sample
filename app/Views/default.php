@@ -18,9 +18,24 @@
       <li><a href="#" class="nav-link px-2 link-secondary">User List</a></li>
       </ul>
 
+      <?php
+        if(!empty($logged_in_user)):
+      ?>
+      <div class="dropdown text-end">
+          <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            <img src="https://placehold.co/32x32" alt="mdo" width="32" height="32" class="rounded-circle">
+          </a>
+          <ul class="dropdown-menu text-small">
+            <li><a class="dropdown-item" href="/dashboard">Dashboard</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="/logout">Sign out</a></li>
+          </ul>
+        </div>
+      <?php else: ?>
       <div class="col-md-3 text-end">
         <a href="/login" class="btn btn-primary">Sign In</a>
       </div>
+      <?php endif; ?>
     </header>
   </div>
     <?= $this->renderSection('content') ?>
