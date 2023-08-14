@@ -10,4 +10,20 @@ class Account extends BaseController
     {
         //
     }
+
+    public function login() {
+
+    }
+
+    public function logout() {
+
+    }
+
+    public function signup() {
+
+    }
+
+    public function doSignup() {
+        
+    }
 }
