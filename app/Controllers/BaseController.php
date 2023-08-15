@@ -70,7 +70,7 @@ abstract class BaseController extends Controller
     }
 
     protected function renderView($view, $data = []) {
-        $data = ['logged_in_user' => $this->loggedInUser];
+        $data['logged_in_user'] =  $this->loggedInUser;
 
         return view($view, $data);
     }
