@@ -36,6 +36,7 @@ $routes->post('/login', 'Account::doLogin');
 $routes->get('/signup', 'Account::signup');
 $routes->post('/signup', 'Account::doSignup');
 $routes->get('/dashboard', 'Account::index');
+$routes->post('/dashboard', 'Account::updateProfile');
 
 /*
  * --------------------------------------------------------------------

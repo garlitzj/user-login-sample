@@ -12,6 +12,26 @@ class Account extends BaseController
         if(empty($this->loggedInUser)) {
             return redirect()->to(site_url('/login'));
         }
+
+        return $this->renderView('Account/dashboard');
+    }
+
+    public function updateProfile() {
+        $about_me = request()->getPost('about');
+
+        // 'ip' => request()->getIPAddress()
+
+        $userModel = new User();
+        $userModel->update($this->loggedInUser['id'], [
+            'about_me' => trim($about_me)
+        ]);
+
+        session()->setFlashdata(
+            [
+                'success' => true
+            ]
+        );
+        return redirect()->to(site_url('dashboard'));
     }
 
     public function login() : string {
@@ -59,6 +79,8 @@ class Account extends BaseController
             }
 
             // password check worked, login and redirect
+
+            $userModel->update($user_by_email['id'], ['ip' => request()->getIPAddress()]);
 
             session()->set('user_id', $user_by_email['id']);
 
