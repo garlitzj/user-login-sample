@@ -28,7 +28,7 @@
 </form>
 <div class="row">
     <div class="col-12">
-        Need an account? <a href="/signup">Sign Up!</a>
+        Need an account? <a href="<?=site_url('signup')?>">Sign Up!</a>
     </div>
 </div>
 </div>

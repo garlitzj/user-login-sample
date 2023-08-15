@@ -42,7 +42,7 @@
     </form>
     <div class="row">
     <div class="col-12">
-        Already have an account? <a href="/login">Login here</a>
+        Already have an account? <a href="<?=site_url('login')?>">Login here</a>
     </div>
 </div>
 </div>
