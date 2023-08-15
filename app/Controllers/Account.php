@@ -13,25 +13,71 @@ class Account extends BaseController
             return redirect()->to(site_url('/login'));
         }
 
-        return $this->renderView('Account/dashboard');
+        $data = [
+            'username' => old('username') ? old('username') : $this->loggedInUser['username'],
+            'about_me' => old('about_me') ? old('about_me') : $this->loggedInUser['about_me'],
+            'job' => old('job') ? old('job') : $this->loggedInUser['job'],
+        ];
+
+        return $this->renderView('Account/dashboard', $data);
     }
 
     public function updateProfile() {
-        $about_me = request()->getPost('about');
-
-        // 'ip' => request()->getIPAddress()
+        if(empty($this->loggedInUser)) {
+            return redirect()->to(site_url('/login'));
+        }
 
         $userModel = new User();
-        $userModel->update($this->loggedInUser['id'], [
-            'about_me' => trim($about_me)
-        ]);
 
-        session()->setFlashdata(
-            [
-                'success' => true
-            ]
-        );
-        return redirect()->to(site_url('dashboard'));
+        $rules = [
+            'username' => 'required|min_length[4]|max_length[16]|alpha_numeric_punct',
+            'job' => 'max_length[32]'
+        ];
+
+        if (! $this->validate($rules)) {
+            session()->setFlashdata(
+                [
+                    'errors' => $this->validator->getErrors()
+                ]
+            );
+            return redirect()->to(site_url('dashboard'))->withInput();
+        } 
+        else {
+            $about_me = request()->getPost('about');
+            $username = request()->getPost('username');
+            $job = request()->getPost('job');
+    
+            $values_to_update = [
+                'about_me' => trim($about_me),
+                'job' => trim($job)
+            ];
+    
+            // username uniqueness check
+    
+            $user_by_name = $userModel->where('username', $username)->first();
+    
+            if(!empty($user_by_name) && $user_by_name['id'] != $this->loggedInUser['id']) {
+                session()->setFlashdata(
+                    [
+                        'errors' =>  [
+                            'username' => 'This username is already taken.'
+                        ]
+                    ]
+                );
+            } else {
+                $values_to_update['username'] = $username;
+                $userModel = new User();
+                $userModel->update($this->loggedInUser['id'], $values_to_update);
+        
+                session()->setFlashdata(
+                    [
+                        'success' => true
+                    ]
+                );
+            }
+
+            return redirect()->to(site_url('dashboard'))->withInput();
+        }
     }
 
     public function login() : string {
@@ -106,7 +152,7 @@ class Account extends BaseController
 
     public function doSignup() {
         $rules = [
-            'username' => 'required|min_length[4]|max_length[16]',
+            'username' => 'required|min_length[4]|max_length[16]|alpha_numeric_punct',
             'password' => 'required|min_length[3]|max_length[32]',
             'passconf' => 'required|matches[password]',
             'email'    => 'required|valid_email',
