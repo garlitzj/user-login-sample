@@ -4,10 +4,11 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\User;
+use CodeIgniter\HTTP\RedirectResponse;
 
 class Users extends BaseController
 {
-    public function index()
+    public function index() : string
     {
         $userModel = new User();
 
@@ -16,7 +17,7 @@ class Users extends BaseController
         return $this->renderView('Users/list', ['users' => $users]);
     }
 
-    public function view($id) {
+    public function view(int $id) : string {
         $userModel = new User();
 
         $user = $userModel->find($id);

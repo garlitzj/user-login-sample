@@ -4,10 +4,11 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\User;
+use CodeIgniter\HTTP\RedirectResponse;
 
 class Account extends BaseController
 {
-    public function index()
+    public function index() : string|RedirectResponse
     {
         if(empty($this->loggedInUser)) {
             return redirect()->to(site_url('/login'));
@@ -22,7 +23,7 @@ class Account extends BaseController
         return $this->renderView('Account/dashboard', $data);
     }
 
-    public function updateProfile() {
+    public function updateProfile() : RedirectResponse {
         if(empty($this->loggedInUser)) {
             return redirect()->to(site_url('/login'));
         }
@@ -80,7 +81,7 @@ class Account extends BaseController
         }
     }
 
-    public function login() : string {
+    public function login() : string|RedirectResponse {
         if(!empty($this->loggedInUser)) {
             return redirect()->to(site_url('/'));
         }
@@ -88,7 +89,7 @@ class Account extends BaseController
         return $this->renderView('Account/login');
     }
 
-    public function doLogin() {
+    public function doLogin() : RedirectResponse {
         $userModel = new User();
 
         $rules = [
@@ -134,12 +135,12 @@ class Account extends BaseController
         }
     }
 
-    public function logout() {
+    public function logout() : RedirectResponse {
         session()->destroy();
         return redirect()->to(site_url(''));
     }
 
-    public function signup() :string {
+    public function signup() : RedirectResponse|string {
         if(!empty($this->loggedInUser)) {
             return redirect()->to(site_url('/'));
         }
@@ -150,7 +151,7 @@ class Account extends BaseController
         return $this->renderView('Account/signup');
     }
 
-    public function doSignup() {
+    public function doSignup() : RedirectResponse {
         $rules = [
             'username' => 'required|min_length[4]|max_length[16]|alpha_numeric_punct',
             'password' => 'required|min_length[3]|max_length[32]',

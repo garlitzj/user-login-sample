@@ -9,6 +9,7 @@ use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use Psr\Log\LoggerInterface;
 use App\Models\User;
+use CodeIgniter\HTTP\RedirectResponse;
 
 /**
  * Class BaseController
@@ -69,7 +70,7 @@ abstract class BaseController extends Controller
         }
     }
 
-    protected function renderView($view, $data = []) {
+    protected function renderView(string $view, mixed $data = []) : string {
         $data['logged_in_user'] =  $this->loggedInUser;
 
         return view($view, $data);
