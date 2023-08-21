@@ -6,12 +6,13 @@
 - Update the sample env file with correct database credentials, and then rename it to .env when done
 - Run `php spark migrate`
 - Run `php spark seed:User`
-- Run `php spark:serve` and navigate to localhost:8080 -- enjoy!
+- Run `php spark:serve` and navigate to localhost:8080 -- enjoy! (Or run via MAMP/XAMPP/Docker etc if preferred). If running from a subdirectory, be sure to set the app path config value
 
 ## Notes
 
 - I used Codeigniter 4 for this project, since Laravel more or less has user signup/login baked into the framework already.
 - There are no transactional emails for signup validation or forgot password flows, as those are more involved and require a third party service (PHP mail isn't super reliable...)
+- Built on PHP 8.2.8 (certain features may not work on lower versions than 8, such as the multiple return types on the Controller methods)
 - User list is set up to use a barebones instance of Data Tables
 - Styling is fairly minimalistic, so there's no bundling system or similar set up for this project
 - In a longer term project, I would typically like to use more Javascript for submitting/updating forms and more interactivity
