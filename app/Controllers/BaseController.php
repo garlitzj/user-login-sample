@@ -73,6 +73,10 @@ abstract class BaseController extends Controller
     protected function renderView(string $view, mixed $data = []) : string {
         $data['logged_in_user'] =  $this->loggedInUser;
 
+        if(!isset($data['active_area'])) {
+            $data['active_area'] = 'home';
+        }
+
         return view($view, $data);
     }
 }

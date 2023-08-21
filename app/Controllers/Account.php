@@ -18,6 +18,8 @@ class Account extends BaseController
             'username' => old('username') ? old('username') : $this->loggedInUser['username'],
             'about_me' => old('about_me') ? old('about_me') : $this->loggedInUser['about_me'],
             'job' => old('job') ? old('job') : $this->loggedInUser['job'],
+            'page_title' => 'Account',
+            'active_area' => 'account'
         ];
 
         return $this->renderView('Account/dashboard', $data);
@@ -86,7 +88,7 @@ class Account extends BaseController
             return redirect()->to(site_url('/'));
         }
 
-        return $this->renderView('Account/login');
+        return $this->renderView('Account/login', ['page_title' => 'Login', 'active_area' => 'account']);
     }
 
     public function doLogin() : RedirectResponse {
@@ -148,7 +150,7 @@ class Account extends BaseController
         if(request()->getGet('success')) {
             return $this->renderView('Account/account_success');
         }
-        return $this->renderView('Account/signup');
+        return $this->renderView('Account/signup', ['page_title' => 'Sign Up', 'active_area' => 'account']);
     }
 
     public function doSignup() : RedirectResponse {

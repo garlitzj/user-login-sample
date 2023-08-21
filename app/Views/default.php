@@ -1,7 +1,7 @@
 <!doctype html>
 <html data-bs-theme="dark" lang="en" class="h-100">
 <head>
-    <title>User Login Demo</title>
+    <title><?=isset($page_title) ? $page_title . ' - ' : ''?> User Login Demo</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <link href="//cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
     <link href="<?=site_url('css/main.css')?>" rel="stylesheet">
@@ -9,17 +9,17 @@
 <body class="d-flex flex-column h-100">
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container">
-    <a class="navbar-brand" href="#">User Login Demo</a>
+    <a class="navbar-brand" href="<?=site_url()?>">User Login Demo</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link" href="<?=site_url()?>">Home</a>
+          <a class="nav-link<?=$active_area == 'home' ? ' active' : ''?>" href="<?=site_url()?>">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="<?=site_url('users')?>">User List</a>
+          <a class="nav-link<?=$active_area == 'users' ? ' active' : ''?>" href="<?=site_url('users')?>">User List</a>
         </li>
         </ul>
         <ul class="navbar-nav ml-auto">

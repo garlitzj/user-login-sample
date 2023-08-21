@@ -14,7 +14,7 @@ class Users extends BaseController
 
         $users = $userModel->findAll();
 
-        return $this->renderView('Users/list', ['users' => $users]);
+        return $this->renderView('Users/list', ['users' => $users, 'page_title' => 'User List', 'active_area' => 'users']);
     }
 
     public function view(int $id) : string {
@@ -26,6 +26,6 @@ class Users extends BaseController
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }
 
-        return $this->renderView('Users/view', ['user' => $user]);
+        return $this->renderView('Users/view', ['user' => $user, 'page_title' => $user['username'] . '\'s Profile', 'active_area' => 'users']);
     }
 }
