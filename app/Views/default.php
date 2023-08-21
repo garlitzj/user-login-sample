@@ -7,39 +7,45 @@
     <link href="<?=site_url('css/main.css')?>" rel="stylesheet">
 </head>
 <body class="d-flex flex-column h-100">
-<div class="container">
-    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
-      <div class="col-md-3 mb-2 mb-md-0">
-        <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none">
-          User Login Demo
-        </a>
-      </div>
-
-      <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-      <li><a href="#" class="nav-link px-2 link-secondary">Home</a></li>
-      <li><a href="/users" class="nav-link px-2 link-secondary">User List</a></li>
-      </ul>
-
-      <?php
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container">
+    <a class="navbar-brand" href="#">User Login Demo</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="<?=site_url()?>">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="<?=site_url('users')?>">User List</a>
+        </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+        <?php
         if(!empty($logged_in_user)):
-      ?>
-      <div class="dropdown text-end">
-          <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="https://placehold.co/32x32" alt="mdo" width="32" height="32" class="rounded-circle">
-          </a>
-          <ul class="dropdown-menu text-small">
-            <li><a class="dropdown-item" href="/dashboard">Dashboard</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="/logout">Sign out</a></li>
-          </ul>
-        </div>
-      <?php else: ?>
-      <div class="col-md-3 text-end">
-        <a href="/login" class="btn btn-primary">Sign In</a>
-      </div>
-      <?php endif; ?>
-    </header>
+        ?>
+        <li class="nav-item dropdown ml-auto">
+        <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="https://placehold.co/32x32" alt="mdo" width="32" height="32" class="rounded-circle">
+              </a>
+              <ul class="dropdown-menu text-small">
+                <li><a class="dropdown-item" href="<?=site_url('dashboard')?>">Dashboard</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="<?=site_url('logout')?>">Sign Out</a></li>
+              </ul>
+        </li>
+        <?php else: ?>
+        <li>
+          <a href="<?=site_url('login')?>" class="btn btn-primary">Sign In</a>
+        </li>
+
+        <?php endif; ?>
+      </ul>
+    </div>
   </div>
+</nav>
   <main class="flex-shrink-0">
     <?= $this->renderSection('content'); ?>
   </main>
