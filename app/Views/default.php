@@ -3,7 +3,7 @@
 <head>
     <title><?=isset($page_title) ? $page_title . ' - ' : ''?> User Login Demo</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-    <link href="//cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datatables.net-bs5/1.13.6/dataTables.bootstrap5.css" integrity="sha512-BBQIvDaKgWcDzMKYPKX95OkGNX9UI5lu7bpRGvR3gjrOuof40eBEanp+XQ0fh7KUfKXOa+0hnDySQ4zkabki1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="<?=site_url('css/main.css')?>" rel="stylesheet">
 </head>
 <body class="d-flex flex-column h-100">

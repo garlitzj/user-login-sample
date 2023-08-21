@@ -4,7 +4,7 @@
 
 <div class="container">
     <h1>Users List</h1>
-    <table id="userTable">
+    <table id="userTable" class="table table-striped" style="width:100%">
         <thead>
             <tr>
                 <th>-</th><th>Username</th><th>Title</th><th>Joined</th>
